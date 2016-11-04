@@ -1,6 +1,11 @@
-Vim setup.
+# Introduction
+Vim setup for syncing between development machines.
 
-# Windows Install
+# Notes
+Some plugins may require additional installs. Notably:  
+* ack.vim requires ack to be installed. See [ack installation instructions](http://beyondgrep.com/install/)
+
+# Usage (Windows)
 
 Clone the repository to where the vim files directory should be (vimfiles for windows, .vimrc elsewhere):
 ```ShellSession
@@ -18,12 +23,11 @@ Clone Vundle to bundle:
 git clone https://github.com/VundleVim/Vundle.vim.git %HOMEPATH%/vimfiles/bundle/Vundle.vim
 ```
 
-Install plugins:  
+Install plugins, by either running:  
 ```ShellSession
 [g]vim +PluginInstall +qall
 ```  
-or, start gvim/vim and run  
+or, start gvim/vim and within vim:
 ```VimL
 :PluginInstall
 ```
-
