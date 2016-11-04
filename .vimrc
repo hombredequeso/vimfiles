@@ -37,7 +37,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'mtth/scratch.vim'
-Plugin 'jlanzarotta/bufexplorer.vim'
+Plugin 'jlanzarotta/bufexplorer'
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'pangloss/vim-javascript'
