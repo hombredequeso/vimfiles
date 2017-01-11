@@ -37,13 +37,14 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'mtth/scratch.vim'
-Plugin 'jlanzarotta/bufexplorer'
+Plugin 'jlanzarotta/bufexplorer.git'
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'pangloss/vim-javascript'
 Plugin 'helino/vim-json'
 Plugin 'ervandew/supertab'
-
+" Plugin 'gabesoft/vim-ags'
+Plugin 'dyng/ctrlsf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -70,6 +71,8 @@ if has('gui_running')
 	set guifont=Consolas:h11:cANSI
 endif
 
+" don't use the alt key for the gvim menu:
+set winaltkeys=no
 set backspace=indent,eol,start
 
 set tabstop=4
@@ -97,6 +100,7 @@ cd c:\Code
 
 " gvim specific settings:
 set guioptions -=T      " remove the toolbar 
+set guioptions -=m      " remove the menu 
 
 " easier navigation between splits/tabs:
 nnoremap <C-J> <C-W><C-J>
@@ -127,6 +131,23 @@ set runtimepath^=~/vimfiles/bundle/ctrlp.vim
 let g:ctrlp_max_files = 0
 let g:ctrlp_custom_ignore = {'dir':'\.git$\|node_modules$'}
 
+" ctrlsf mappings
+nmap     <M-s>f <Plug>CtrlSFPrompt
+vmap     <M-s>F <Plug>CtrlSFVwordPath
+vmap     <M-s>F <Plug>CtrlSFVwordExec
+nmap     <M-s>n <Plug>CtrlSFCwordPath
+nmap     <M-s>p <Plug>CtrlSFPwordPath
+nnoremap <M-s>o :CtrlSFOpen<CR>
+nnoremap <M-s>t :CtrlSFToggle<CR>
+inoremap <M-s>t <Esc>:CtrlSFToggle<CR>
+nmap     <M-s>l <Plug>CtrlSFQuickfixPrompt
+vmap     <M-s>l <Plug>CtrlSFQuickfixVwordPath
+vmap     <M-s>L <Plug>CtrlSFQuickfixVwordExec
+
+
+
+let g:ctrlsf_position = 'right'
+
 " y to system register
 set clipboard=unnamed
 
@@ -146,4 +167,6 @@ set autowriteall     " Automatically :write before running commands
 set hlsearch
 nnoremap <Esc>h :nohlsearch<CR>
 
+" for vim-multiple-cursors
+set selection=inclusive
 
