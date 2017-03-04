@@ -1,3 +1,12 @@
+" http://vim.wikia.com/wiki/Synchronize_configuration_to_many_computers
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+" across (heterogeneous) systems easier.
+if has('win32') || has('win64')
+  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+
+
+
 " vundle: as per : https://github.com/gmarik/Vundle.vim#quick-start
 "
 set nocompatible              " be iMproved, required
@@ -32,19 +41,26 @@ Plugin 'gmarik/Vundle.vim'
 " Added plugins for vundle. 
 " After adding, in vim run the command ":PluginInstall"
 
-Plugin 'mileszs/ack.vim'
+" git plugin
+Plugin 'tpope/vim-fugitive'
+" Search (replaced by ctrlsf)
+" Plugin 'mileszs/ack.vim'
+Plugin 'dyng/ctrlsf.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
-Plugin 'mtth/scratch.vim'
 Plugin 'jlanzarotta/bufexplorer.git'
+" status line
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Autocomplete
+" Plugin 'ervandew/supertab'
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'pangloss/vim-javascript'
-Plugin 'helino/vim-json'
-Plugin 'ervandew/supertab'
-" Plugin 'gabesoft/vim-ags'
-Plugin 'dyng/ctrlsf.vim'
+Plugin 'elzr/vim-json'
+Plugin 'neovimhaskell/haskell-vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,6 +87,9 @@ if has('gui_running')
 	set guifont=Consolas:h11:cANSI
 endif
 
+" status line theme, lighten it please!
+let g:airline_theme='zenburn'
+
 " don't use the alt key for the gvim menu:
 set winaltkeys=no
 set backspace=indent,eol,start
@@ -94,6 +113,9 @@ set showcmd       " display incomplete commands
 " set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
+set wildmenu
+set autoindent
+set incsearch
 
 colorscheme slate
 cd c:\Code
