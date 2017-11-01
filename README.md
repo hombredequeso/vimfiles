@@ -31,3 +31,14 @@ or, start gvim/vim and within vim:
 ```VimL
 :PluginInstall
 ```
+
+
+# Usage (Linux)
+
+```ShellSession
+git clone https://github.com/hombredequeso/vimfiles.git ~/.vim
+
+ln -s ~/.vim/.vimrc ~/.vimrc
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```

@@ -13,8 +13,13 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/vimfiles/bundle/Vundle.vim
-let path='~/vimfiles/bundle'
+if has('win32') || has('win64')
+  set rtp+=~/vimfiles/bundle/Vundle.vim
+  let path='~/vimfiles/bundle'
+else
+  set rtp+=~/.vim/bundle/Vundle.vim
+  let path='~/.vim/bundle'
+endif
 call vundle#begin(path)
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -118,11 +123,15 @@ set autoindent
 set incsearch
 
 colorscheme slate
-cd c:\Code
+if has('win32') || has('win64')
+    cd c:\Code
+endif
 
 " gvim specific settings:
-set guioptions -=T      " remove the toolbar 
-set guioptions -=m      " remove the menu 
+if has('win32') || has('win64')
+    set guioptions -=T      " remove the toolbar 
+    set guioptions -=m      " remove the menu 
+endif
 
 " easier navigation between splits/tabs:
 nnoremap <C-J> <C-W><C-J>
@@ -147,7 +156,11 @@ nnoremap <Esc>f :%!python -m json.tool<CR>
 
 " Other settings:
 
-set runtimepath^=~/vimfiles/bundle/ctrlp.vim
+if has('win32') || has('win64')
+  set runtimepath^=~/vimfiles/bundle/ctrlp.vim
+else
+  set runtimepath^=~/.vim/bundle/ctrlp.vim
+endif
 
 " ctrlp settings
 let g:ctrlp_max_files = 0
