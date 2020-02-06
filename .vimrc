@@ -44,7 +44,9 @@ Plugin 'gmarik/Vundle.vim'
 "    Plugin 'user/L9', {'name': 'newL9'}
 
 " Added plugins for vundle. 
-" After adding, in vim run the command ":PluginInstall"
+" To reload the (current) vimrc file (before doing PluginInstall)
+"   :so %
+" After adding and reloading vimrc, in vim run the command ":PluginInstall"
 
 " git plugin
 Plugin 'tpope/vim-fugitive'
@@ -66,6 +68,18 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'neovimhaskell/haskell-vim'
 
+Plugin 'mtth/scratch.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+
+" terraform, from hashicorp
+Plugin 'hashivim/vim-terraform'
+
+" colorscheme:
+Plugin 'rakr/vim-one'
+
+" languages:
+Plugin 'mrk21/yaml-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -88,9 +102,9 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
-if has('gui_running')
-	set guifont=Consolas:h11:cANSI
-endif
+" if has('gui_running')
+"	set guifont=Consolas:h11:cANSI
+" endif
 
 " status line theme, lighten it please!
 let g:airline_theme='zenburn'
@@ -99,10 +113,12 @@ let g:airline_theme='zenburn'
 set winaltkeys=no
 set backspace=indent,eol,start
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
-set smartindent
+" Don't use smartindent. It can interfer with file type based indentation
+" https://vim.fandom.com/wiki/Indenting_source_code
+" set smartindent
 
 " if a search/replace is all lowercase, then ignore case for the search/replace.
 set ignorecase
@@ -122,10 +138,23 @@ set wildmenu
 set autoindent
 set incsearch
 
-colorscheme slate
-if has('win32') || has('win64')
-    cd c:\Code
+" https://github.com/rakr/vim-one
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 endif
+
+colorscheme one
+set background=dark " for the dark version
+
 
 " gvim specific settings:
 if has('win32') || has('win64')
@@ -147,12 +176,18 @@ nnoremap <silent> <M-F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
 " MC special addition
 nnoremap <silent> <M-j> :BufExplorer<CR>
+nnoremap <ESC>f :BufExplorer<CR>
+" MC mac osx special:
+nnoremap <silent>^[j :BufExplorer<CR>
+
+nnoremap <F10> <C-^>
 
 " Special Mark Cheeseman additions:
 " Pretty print json in the current buffer
-nnoremap <Esc>f :%!python -m json.tool<CR>
+" trying to get iterm2 working, using esc-f above...
+nnoremap <M-=> :%!python -m json.tool<CR>
 
-
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
 " Other settings:
 
@@ -179,7 +214,14 @@ nmap     <M-s>l <Plug>CtrlSFQuickfixPrompt
 vmap     <M-s>l <Plug>CtrlSFQuickfixVwordPath
 vmap     <M-s>L <Plug>CtrlSFQuickfixVwordExec
 
-
+" nmap     <C-F>f <Plug>CtrlSFPrompt
+" vmap     <C-F>f <Plug>CtrlSFVwordPath
+" vmap     <C-F>F <Plug>CtrlSFVwordExec
+" nmap     <C-F>n <Plug>CtrlSFCwordPath
+" nmap     <C-F>p <Plug>CtrlSFPwordPath
+" nnoremap <C-F>o :CtrlSFOpen<CR>
+" nnoremap <C-F>t :CtrlSFToggle<CR>
+" inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
 let g:ctrlsf_position = 'right'
 
@@ -188,6 +230,8 @@ set clipboard=unnamed
 
 " NERDTree defaults
 let g:NERDTreeShowHidden=1
+
+map <leader>f :NERDTreeFind<CR>
 
 " file formats
 " set encoding=utf-8      " The encoding displayed.
@@ -205,3 +249,9 @@ nnoremap <Esc>h :nohlsearch<CR>
 " for vim-multiple-cursors
 set selection=inclusive
 
+" for Scratch settings:
+let g:scratch_autohide=&hidden
+
+" Hide unsaved buffers, rather than opening new windows.
+"https://medium.com/usevim/vim-101-set-hidden-f78800142855
+set hidden
