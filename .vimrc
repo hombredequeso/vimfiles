@@ -80,6 +80,7 @@ Plugin 'rakr/vim-one'
 
 " languages:
 Plugin 'mrk21/yaml-vim'
+Plugin 'leafgarland/typescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -168,6 +169,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+
 " bufexplorer mappings, slightly modified form of
 " http://vim.wikia.com/wiki/Easier_buffer_switching
 " Buffers - explore/next/previous: Alt-F12, F12, Shift-F12.
@@ -185,7 +187,12 @@ nnoremap <F10> <C-^>
 " Special Mark Cheeseman additions:
 " Pretty print json in the current buffer
 " trying to get iterm2 working, using esc-f above...
-nnoremap <M-=> :%!python -m json.tool<CR>
+nnoremap <M-=> :%!jq .<CR>
+vmap <M-=> :%!jq .<CR>
+
+" python json.tool edition, if jq isn't installed:
+" nnoremap <M-=> :%!python -m json.tool<CR>
+" vmap <M-=> :%!python -m json.tool<CR>
 
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
@@ -255,3 +262,5 @@ let g:scratch_autohide=&hidden
 " Hide unsaved buffers, rather than opening new windows.
 "https://medium.com/usevim/vim-101-set-hidden-f78800142855
 set hidden
+
+set scrolloff=15
