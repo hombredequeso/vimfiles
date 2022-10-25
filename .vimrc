@@ -1,15 +1,4 @@
-" http://vim.wikia.com/wiki/Synchronize_configuration_to_many_computers
-" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-" across (heterogeneous) systems easier.
-if has('win32') || has('win64')
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-
-
-
-" vundle: as per : https://github.com/gmarik/Vundle.vim#quick-start
-"
-set nocompatible              " be iMproved, required
+" http://vim.wikia.com/wiki/Synchronize_configuration_to_many_computers " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization " across (heterogeneous) systems easier.  if has('win32') || has('win64') set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after endif " vundle: as per : https://github.com/gmarik/Vundle.vim#quick-start " set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -108,7 +97,9 @@ filetype plugin indent on
 " endif
 
 " status line theme, lighten it please!
-let g:airline_theme='zenburn'
+let g:airline_theme='onedark'
+
+let mapleader=","
 
 " don't use the alt key for the gvim menu:
 set winaltkeys=no
@@ -258,9 +249,13 @@ set selection=inclusive
 
 " for Scratch settings:
 let g:scratch_autohide=&hidden
+let g:scratch_horizontal = 0
+let g:scratch_top = 0
 
 " Hide unsaved buffers, rather than opening new windows.
 "https://medium.com/usevim/vim-101-set-hidden-f78800142855
 set hidden
 
 set scrolloff=15
+
+set signcolumn=number
