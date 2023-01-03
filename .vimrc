@@ -181,6 +181,9 @@ nnoremap <F10> <C-^>
 nnoremap <M-=> :%!jq .<CR>
 vmap <M-=> :%!jq .<CR>
 
+" disable json plugin conceal of quotation marks:
+let g:vim_json_syntax_conceal = 0
+
 " python json.tool edition, if jq isn't installed:
 " nnoremap <M-=> :%!python -m json.tool<CR>
 " vmap <M-=> :%!python -m json.tool<CR>
