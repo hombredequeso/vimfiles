@@ -6,7 +6,6 @@ if has('win32') || has('win64')
 endif
 
 
-
 " vundle: as per : https://github.com/gmarik/Vundle.vim#quick-start
 "
 set nocompatible              " be iMproved, required
@@ -99,12 +98,7 @@ filetype plugin indent on    " required
 
 " end of vundle
 
-" stopped using pathogen. Using vundle
-" execute pathogen#infect()
-
 syntax on
-filetype plugin indent on
-
 
 " if has('gui_running')
 "	set guifont=Consolas:h11:cANSI
@@ -113,8 +107,6 @@ filetype plugin indent on
 " status line theme, lighten it please!
 let g:airline_theme='onedark'
 " alternatively, try 'zenburn'
-
-let mapleader=","
 
 " Set the leader to comma, because that is much easier to work with.
 let mapleader=","
@@ -126,6 +118,7 @@ set backspace=indent,eol,start
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
 " Don't use smartindent. It can interfer with file type based indentation
 " https://vim.fandom.com/wiki/Indenting_source_code
 " set smartindent
@@ -304,12 +297,5 @@ set scrolloff=15
 set signcolumn=number
 " Spelling
 set spelllang=en
-set spellfile=/home/mcheeseman/.vim/spell/custom-spell.utf-8.add
-autocmd BufRead,BufNewFile *.md setlocal spell
-autocmd BufRead,BufNewFile *.md set wrap linebreak
+set spellfile=~/.vim/spell/custom-spell.utf-8.add
 
-" noremap <leader>y "+y
-" noremap <leader>p "+p
-
-
-" set signcolumn=number
