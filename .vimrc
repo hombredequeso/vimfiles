@@ -99,9 +99,12 @@ filetype plugin indent on    " required
 
 " end of vundle
 
-execute pathogen#infect()
+" stopped using pathogen. Using vundle
+" execute pathogen#infect()
+
 syntax on
 filetype plugin indent on
+
 
 " if has('gui_running')
 "	set guifont=Consolas:h11:cANSI
@@ -109,6 +112,9 @@ filetype plugin indent on
 
 " status line theme, lighten it please!
 let g:airline_theme='zenburn'
+
+" Set the leader to comma, because that is much easier to work with.
+let mapleader=","
 
 " don't use the alt key for the gvim menu:
 set winaltkeys=no
@@ -139,6 +145,10 @@ set wildmenu
 set autoindent
 set incsearch
 
+" display as much of the last paragraph as possible, even if it wraps.
+" https://vim.fandom.com/wiki/Working_with_long_lines
+set display+=lastline
+
 " https://github.com/rakr/vim-one
 if (empty($TMUX))
   if (has("nvim"))
@@ -153,7 +163,7 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme one
+" colorscheme one
 set background=dark " for the dark version
 
 
@@ -176,8 +186,10 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <silent> <F12> :BufExplorer<CR>
 nnoremap <silent> <M-F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
+nnoremap <silent> <A-F12> :bn<CR>
 " MC special addition
 nnoremap <silent> <M-j> :BufExplorer<CR>
+nnoremap <silent> <A-j> :BufExplorer<CR>
 nnoremap <ESC>f :BufExplorer<CR>
 " MC mac osx special:
 nnoremap <silent>^[j :BufExplorer<CR>
@@ -190,6 +202,11 @@ nnoremap <F10> <C-^>
 nnoremap <M-=> :%!jq .<CR>
 vmap <M-=> :%!jq .<CR>
 
+" disable json plugin conceal of quotation marks:
+let g:vim_json_syntax_conceal = 0
+
+nnoremap <A-=> :%!jq .<CR>
+vmap <A-=> :%!jq .<CR>
 " python json.tool edition, if jq isn't installed:
 " nnoremap <M-=> :%!python -m json.tool<CR>
 " vmap <M-=> :%!python -m json.tool<CR>
@@ -221,6 +238,19 @@ nmap     <M-s>l <Plug>CtrlSFQuickfixPrompt
 vmap     <M-s>l <Plug>CtrlSFQuickfixVwordPath
 vmap     <M-s>L <Plug>CtrlSFQuickfixVwordExec
 
+
+nmap     <A-s>f <Plug>CtrlSFPrompt
+vmap     <A-s>F <Plug>CtrlSFVwordPath
+vmap     <A-s>F <Plug>CtrlSFVwordExec
+nmap     <A-s>n <Plug>CtrlSFCwordPath
+nmap     <A-s>p <Plug>CtrlSFPwordPath
+nnoremap <A-s>o :CtrlSFOpen<CR>
+nnoremap <A-s>t :CtrlSFToggle<CR>
+inoremap <A-s>t <Esc>:CtrlSFToggle<CR>
+nmap     <A-s>l <Plug>CtrlSFQuickfixPrompt
+vmap     <A-s>l <Plug>CtrlSFQuickfixVwordPath
+vmap     <A-s>L <Plug>CtrlSFQuickfixVwordExec
+
 " nmap     <C-F>f <Plug>CtrlSFPrompt
 " vmap     <C-F>f <Plug>CtrlSFVwordPath
 " vmap     <C-F>F <Plug>CtrlSFVwordExec
@@ -233,7 +263,8 @@ vmap     <M-s>L <Plug>CtrlSFQuickfixVwordExec
 let g:ctrlsf_position = 'right'
 
 " y to system register
-set clipboard=unnamed
+" https://stackoverflow.com/questions/30691466/what-is-difference-between-vims-clipboard-unnamed-and-unnamedplus-settings
+set clipboard^=unnamed,unnamedplus
 
 " NERDTree defaults
 let g:NERDTreeShowHidden=1
@@ -245,7 +276,7 @@ map <leader>f :NERDTreeFind<CR>
 " set fileencoding=utf-8  " The encoding written to file.
 
 " autowrite on focus lost:
-au FocusLost * :wa
+:au FocusLost * silent! :wa
 set autowriteall     " Automatically :write before running commands
 
 " have highlighted search
@@ -258,9 +289,23 @@ set selection=inclusive
 
 " for Scratch settings:
 let g:scratch_autohide=&hidden
+let g:scratch_horizontal=1
+let g:scratch_height=0.4
 
 " Hide unsaved buffers, rather than opening new windows.
 "https://medium.com/usevim/vim-101-set-hidden-f78800142855
 set hidden
 
 set scrolloff=15
+
+" Spelling
+set spelllang=en
+set spellfile=/home/mcheeseman/.vim/spell/custom-spell.utf-8.add
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.md set wrap linebreak
+
+" noremap <leader>y "+y
+" noremap <leader>p "+p
+
+
+" set signcolumn=number
