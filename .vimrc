@@ -49,8 +49,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " git plugin
 Plugin 'tpope/vim-fugitive'
-" Search (replaced by ctrlsf)
-" Plugin 'mileszs/ack.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
