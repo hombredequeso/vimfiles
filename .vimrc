@@ -111,7 +111,10 @@ filetype plugin indent on
 " endif
 
 " status line theme, lighten it please!
-let g:airline_theme='zenburn'
+let g:airline_theme='onedark'
+" alternatively, try 'zenburn'
+
+let mapleader=","
 
 " Set the leader to comma, because that is much easier to work with.
 let mapleader=","
@@ -298,6 +301,7 @@ set hidden
 
 set scrolloff=15
 
+set signcolumn=number
 " Spelling
 set spelllang=en
 set spellfile=/home/mcheeseman/.vim/spell/custom-spell.utf-8.add
